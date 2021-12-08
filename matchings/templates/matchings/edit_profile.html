@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Edit</title>
+{% endblock %} 
+
+{% block body %}
+    <h1>{{ user.username }} : Edit Profile!</h1>
+    <h4><a href="{% url 'profile' %}">Back</a></h4>
+    <div class="form-group">
+        <form id='upload_form' method='POST' action="{% url 'edit_profile' %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm">
+                    <table class="table">
+                        <tr>
+                            <td><label for="name_place">Name</label></td>
+                            <td>
+                                <input type="text" class="form-control" name="fname" value="{{ user.first_name }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="surname_place">Surname</label></td>
+                            <td>
+                                <input type="text" class="form-control" name="lname" value="{{ user.last_name }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="email_place">Email</label></td>
+                            <td>
+                                <input type="text" class="form-control" name="email" value="{{ user.email }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="gender_place">Gender</label></td>
+                            <td>
+                                <input type="radio" name="gender" value="Male" {% if user.gender == "Male" %} checked {% endif %}>Male</input>
+                                <input type="radio" name="gender" value="Female" {% if user.gender == "Female" %} checked {% endif %}>Female</input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="dob_place">Date of Birth</label></td>
+                            <td>
+                                <input type="date" class="form-control" name="dob" value="{{ date }}">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-sm">
+                    <h5>Your hobbies</h5>
+                    <ul class="list-unstyled pre-scrollable">
+                        {% for hobby in h_list %}
+                        <li><input type="checkbox" name="hobby" value="{{ hobby }}" {% if hobby in hobbies %} checked {% endif %}>{{ hobby }}</input></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <h6>Click on picture to change...</h6>
+                    {% if user.picture %}
+                        <img id='profile-img' src='{{ user.picture.url }}' height="200" width="200"></img>
+                    {% else %}
+                        <img id='profile-img' src="{% static 'matchings/profile-image.jpg' %}" height="200" width="200"></img>
+                    {% endif %}
+                    <progress id="progressBar" value="0" max="100" style="width:200px;display:none;"></progress>
+                    <input type="file" id="img_file" style="display:none;"></input>
+                </div>
+            </div>
+            <input type='submit' class="btn btn-outline-success" value='Save'>
+        </form>
+    </div>
+{% endblock %}

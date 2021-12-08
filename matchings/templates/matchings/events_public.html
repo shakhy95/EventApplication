@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Public Events</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="event-container" class="pre-scrollable">
+            {% csrf_token %}
+            {% for event in events %}
+                <div id="{{ event.title }}" class="container">
+                    <div class="row">
+                        <h3>{{ event.title }}</h3>
+                    </div>
+                    <div class="row">
+                        <h5 class="txt-secondary">{{ event.owner.username }}</h5>
+                    </div>
+                    <div class="row">
+                        {% for participant in event.participants.all %}
+                            <div class="col-1">{{ participant.username }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <h5 class="text-primary">{{ event.location }}</h5>
+                    </div>
+                    <div class="row">
+                        <h6 class="text-info">{{ event.date }}   {{ event.time }}</h6>
+                    </div>
+                    <div class="row text-body">
+                        {{ event.desc }}
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-outline-info" id="{{ event.title }}" value="{{ event.title }}">Join Event</button>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

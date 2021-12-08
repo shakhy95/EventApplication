@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block head %}
+    <title>Create Event</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form id="evt-form" action="{% url 'event_create' %}" method="post">
+            {% csrf_token %}
+            <div class="from-group row">
+                <label for="sender">Owner</label>
+                <input type="text" class="form-control" name="evt-owner" value="{{ username }}" readonly>
+            </div>
+            <div class="from-group row">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="evt-title" name="evt-title" placeholder="Title...">
+            </div>
+            <div class="from-group row">
+                <label for="desc">Description</label>
+                <textarea class="form-control" id="evt-desc" name="evt-desc" rows="8" cols="80" placeholder="Description of the event..."></textarea>
+            </div>
+            <div class="from-group row">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="evt-loc" name="evt-loc" placeholder="London...">
+            </div>
+            <div class="from-group row">
+                <label for="date" class="col-sm-2 col-form-label">Date</label>
+                <div class="col-4">
+                    <input type="date" class="form-control" id="evt-date" name="evt-date" placeholder="London...">
+                </div>
+            </div>
+            <div class="from-group row">
+                <label for="time" class="col-sm-2 col-form-label">Time</label>
+                <div class="col-4">
+                    <input type="time" class="form-control" id="evt-time" name="evt-time" placeholder="London...">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col">
+                    <input type="radio" class="form-check-input" name="evt-type" value="public"></input>
+                    <label class="form-check-label" for="inlineCheckbox1">Public</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="form-check-input" name="evt-type" value="private"></input>
+                    <label class="form-check-label" for="inlineCheckbox1">Private</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <input type="button" class="btn btn-outline-primary" id="evt-button" value="Create">
+            </div>
+        </form>
+    </div>
+{% endblock %}

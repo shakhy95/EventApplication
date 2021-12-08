@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Profile</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Welcome {{ user.username }}!</h1>
+    <div class="container">
+        <h4><a href="{% url 'edit_profile' %}">Edit Profile</a></h4>
+        <div class="row">
+            <div class="col-sm">
+                <table class="table">
+                    <tr>
+                        <td><label for="name_place">Name</label></td>
+                        <td><label for="name"></label>{{ user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="surname_place">Surname</label></td>
+                        <td><label for="surname"></label>{{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="email_place">Email</label></td>
+                        <td><label for="email"></label>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="gender_place">Gender</label></td>
+                        <td><label for="gender">{{ user.gender }}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label for="dob_place">Date of Birth</label></td>
+                        <td><label for="dob">{{ date }}</label></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm">
+                <h5>Hobbies</h5>
+                <ul class="list-unstyled pre-scrollable">
+                    {% for hobby in hobbies %}
+                    <li>{{ hobby }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm">
+                {% if user.picture %}
+                    <img id='profile-img' src='{{ user.picture.url }}' height="200" width="200"></img>
+                {% else %}
+                    <img id='profile-img' src="{% static 'matchings/profile-image.jpg' %}" height="200" width="200"></img>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

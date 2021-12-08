@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Inbox</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-warning">Inbox</h1>
+        {% for message in messages %}
+            <div class="row">
+                <div class="col-3 text-success"><h4>{{ message.sender }}</h4></div>
+                <div class="col-3 text-info"><i>{{ message.time }}</i></div>
+                <div class="w-100"></div>
+                <div class="col text-body">{{ message.text }}</div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

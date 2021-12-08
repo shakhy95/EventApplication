@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Private Events</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="event-container" class="pre-scrollable">
+        {% for event in events %}
+            <div id="{{ event.title }}" class="container">
+                <div class="row">
+                    <h3>{{ event.title }}</h3>
+                </div>
+                <div class="row">
+                    <h5 class="txt-secondary">{{ event.owner.username }}</h5>
+                </div>
+                <div class="row">
+                    <h5 class="text-primary">{{ event.location }}</h5>
+                </div>
+                <div class="row">
+                    <h6 class="text-info">{{ event.date }}   {{ event.time }}</h6>
+                </div>
+                <div class="row text-body">
+                    {{ event.desc }}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

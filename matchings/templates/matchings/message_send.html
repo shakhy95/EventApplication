@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Sind Message</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form action="{% url 'message_send' %}" method="post">
+            {% csrf_token %}
+            <div class="from-group">
+                <label for="sender">Sender</label>
+                <input type="text" class="form-control" name="msg-sender" value="{{ username }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="receiver">Receiver</label>
+                <select class="custom-select mr-sm-2" name="msg-receiver">
+                    <option selected>Choose...</option>
+                    {% for username in u_list %}
+                        <option value="{{ username }}">{{ username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="from-group">
+                <label for="text">Text</label>
+                <textarea class="form-control" name="msg-text" rows="8" cols="80" placeholder="Insert you messege here..."></textarea>
+            </div>
+            <hr>
+            <input type="submit" class="btn btn-outline-primary" name="msg-button" value="Send">
+        </form>
+    </div>
+
+{% endblock %}

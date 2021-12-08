@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Profile</title>
+{% endblock %}
+
+{% block body %}
+    <div class="list-group">
+        <div class="row">
+            <div id="list-container" class="col-8 pre-scrollable">
+                {% for key, val in h_dic %}
+                    <div id='{{ key.username }}' class="list-group-item list-group-item-action">
+                        <div class="row">
+                            <div class="col-sm">
+                                <label id='{{ key.username }}-fname' for="first-name">{{ key.first_name }}</label>
+                            </div>
+                            <div class="col-sm">
+                                <label id='{{ key.username }}-lname' for="last-name">{{ key.last_name }}</label>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-sm">
+                                <label id='{{ key.username }}-gender' for="gender">{{ key.gender }}</label>
+                            </div>
+                            <div class="col-sm">
+                                <label id='{{ key.username }}-date' for="d-o-b">{{ key.date_of_birth}}</label>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-sm">
+                                <label for="h_count">Matching hobbies: </label>
+                                <label id='{{ key.username }}-count' for="hobby-count">{{ val }}</label>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-3 well">
+                <h3>Filter</h3>
+                <div class="container well">
+                    <div id="filter-info" style="display:none">
+                        <label for="gen_filter"><b>Gender : </b></label>
+                        <label id="gen-type"></label>
+                        <br>
+                        <label for="age_filter"><b>Age - </b></label>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<label for="min-age"><i>Min Age : </i></label>
+                        <label id="min-age"></label>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<label for="max-age"><i>Max Age : </i></label>
+                        <label id="max-age"></label>
+                        <br>
+                        <input type="button" class="btn btn-success" name="f_submit" id="btn-show" value="Reset Filter">
+                    </div>
+                    <div id="filter-div">
+                        <form id="filter-form" action="" method="">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="checkbox" class="form-check-input" id="checkbox_gen" name="f_gender" value="Gender"></input>
+                                <label class="form-check-label" for="inlineCheckbox1">Gender</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<div class="col">
+                                        <input type="radio" class="form-check-input" name="radio_gen" value="Male"></input>
+                                        <label class="form-check-label" for="inlineCheckbox1">Male</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="radio" class="form-check-input" name="radio_gen" value="Female"></input>
+                                        <label class="form-check-label" for="inlineCheckbox1">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" class="form-check-input" id="checkbox_age" value="Age"></input>
+                                <label class="form-check-label" for="inlineCheckbox1">Age</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="min_age">Min Age</label>
+                                <input type="text" class="form-control" id="f_min_age" placeholder="minimum age..."></input>
+                            </div>
+                            <div class="form-group row">
+                                <label for="max_age">Max Age</label>
+                                <input type="text" class="form-control" id="f_max_age" placeholder="maximum age..."></input>
+                            </div>
+                            <div class="form-group row">
+                                <input type="button" class="btn btn-primary" name="f_submit" id="btn-filter" value="Filter">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

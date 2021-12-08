@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Sind Message</title>
+{% endblock %}
+
+{% block body %}
+    <h4>Title = {{ title }}</h4>
+    <h4>Location = {{ loc }}</h4>
+    <h4>Time = {{ time }}</h4>
+    <h4>Date = {{ date }}</h4>
+    <h4>Public = {{ pub }}</h4>
+    <br>
+    <h6>{{ desc }}</h6>
+{% endblock %}
